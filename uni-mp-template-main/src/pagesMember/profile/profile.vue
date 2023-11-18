@@ -82,6 +82,7 @@ const onFullLocationChange: UniHelper.RegionPickerOnChange = (ev) => {
   fullLocationCode = ev.detail.code!
 }
 
+const memberStore = useMemberStore()
 // 点击保存提交表单
 const onSubmit = async () => {
   const { nickname, gender, birthday, profession } = profile.value
