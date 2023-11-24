@@ -1,7 +1,6 @@
 <script setup lang="ts">
-//
 defineProps<{
-  list: HotItem[]
+  list: CategoryItem[]
 }>()
 </script>
 

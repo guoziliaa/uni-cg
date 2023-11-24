@@ -1,5 +1,6 @@
 // src/utils/http.ts
 import { useMemberStore } from '@/stores'
+// http.ts
 // 请求基地址
 const baseURL = import.meta.env.VITE_API_URL as string
 // 拦截器配置

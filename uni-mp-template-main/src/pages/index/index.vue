@@ -7,17 +7,20 @@
       refresher-enabled
       @refresherrefresh="onRefresherrefresh"
       :refresher-triggered="isTriggered"
+      scroll-y
       @scrolltolower="onScrolltolower"
       class="scroll-view"
-      scroll-y
     >
-      <wSwiper :list="bannerList"></wSwiper>
-      <!-- 商品分类 -->
-      <CategoryPanel :list="categoryList" />
-      <!-- 热门推荐 -->
-      <HotPanel :list="hotList" />
-      <!-- 猜你喜欢 -->
-      <wGuess ref="guessRef" />
+      <PageSkeleton v-if="isLoading"></PageSkeleton>
+      <template v-else>
+        <wSwiper :list="bannerList"></wSwiper>
+        <!-- 商品分类 -->
+        <CategoryPanel :list="categoryList" />
+        <!-- 热门推荐 -->
+        <HotPannel :list="hotList" />
+        <!-- 猜你喜欢 -->
+        <Guess ref="guessRef" />
+      </template>
     </scroll-view>
   </view>
 </template>
@@ -25,9 +28,10 @@
 // @ts-nocheck
 import CustomNavbar from './components/CustomNavbar'
 import CategoryPanel from './components/CategoryPanel'
-import HotPanel from './components/HotPanel'
-import type { wGuessInstance } from '@/types/components'
-import PageSkeleton from './components/PageSkeleton'
+import HotPannel from './components/HotPannel'
+import type { GuessInstance } from '@/types/components'
+import Guess from '@/components/Guess/Guess'
+import PageSkeleton from './components/PageSkeleton.vue'
 // 获取轮播图
 const bannerList = ref<BannerItem[]>([])
 
@@ -58,11 +62,12 @@ onLoad(async () => {
 })
 
 // 获取猜你喜欢组件实例
-const guessRef = ref<wGuessInstance>()
+const guessRef = ref<GuessInstance>()
 // 滚动触底事件
 const onScrolltolower = () => {
   guessRef.value?.getMore()
 }
+
 // 下拉刷新状态
 const isTriggered = ref(false)
 // 自定义下拉刷新被触发

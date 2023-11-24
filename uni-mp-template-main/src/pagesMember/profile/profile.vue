@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { getMemberProfileAPI, putMemberProfileAPI } from '@/api/login'
 import { codeToText } from '@/utils/element-china-area-data.mjs'
+const memberStore = useMemberStore()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 // 完整地区
@@ -82,7 +83,6 @@ const onFullLocationChange: UniHelper.RegionPickerOnChange = (ev) => {
   fullLocationCode = ev.detail.code!
 }
 
-const memberStore = useMemberStore()
 // 点击保存提交表单
 const onSubmit = async () => {
   const { nickname, gender, birthday, profession } = profile.value
