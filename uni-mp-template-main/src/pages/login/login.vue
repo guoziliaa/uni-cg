@@ -5,6 +5,8 @@ import { postLoginWxMinAPI, postLoginWxMinSimpleAPI } from '@/api/login'
 let code = ''
 onLoad(async () => {
   const res = await wx.login()
+  console.log(res, '++++++++++++++')
+
   code = res.code // 用户登录凭证（有效期五分钟）。开发者需要在开发者服务器后台调用 code2Session，使用 code 换取 openid、unionid、session_key 等信息
 })
 
